@@ -1,0 +1,37 @@
+context:
+  version: 1.5.5
+  build_number: '0'
+
+package:
+  name: reachy-mini-motor-controller
+  version: ${{ version }}
+
+source:
+  git: https://github.com/pollen-robotics/reachy-mini-motor-controller.git
+  tag: v${{ version }}
+
+build:
+  number: ${{ build_number }}
+  script: ${{ PYTHON }} -m pip install .
+
+requirements:
+  build:
+  - rust
+  - puccinialin
+  host:
+  - python
+  - maturin==1.9.4
+  - pip
+  run:
+  - python
+
+tests:
+- python:
+    imports:
+    - reachy_mini_motor_controller
+    pip_check: true
+
+about:
+  homepage: https://github.com/pollen-robotics/reachy-mini-motor-controller
+  summary: "Handles communication with the stewart platform (6x XL330), the base rotation (XC330) and the antennas (XL330)."
+  description: ''
