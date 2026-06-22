@@ -1,5 +1,5 @@
 context:
-  version: 1.5.5
+  version: 1.5.6
   build_number: '0'
 
 package:
@@ -9,6 +9,8 @@ package:
 source:
   git: https://github.com/pollen-robotics/reachy-mini-motor-controller.git
   tag: v${{ version }}
+  patches:
+    - patches/001-controller-timeout.patch
 
 build:
   number: ${{ build_number }}

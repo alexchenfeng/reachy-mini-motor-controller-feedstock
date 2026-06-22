@@ -1,0 +1,35 @@
+diff --git a/src/bin/overhead_bench.rs b/src/bin/overhead_bench.rs
+index 2a058a9..e05e013 100644
+--- a/src/bin/overhead_bench.rs
++++ b/src/bin/overhead_bench.rs
+@@ -30,7 +30,7 @@ fn main() {
+         let dph_v2 = rustypot::DynamixelProtocolHandler::v2();
+ 
+         let mut serial_port = serialport::new(serialport, 1_000_000)
+-            .timeout(Duration::from_millis(10))
++            .timeout(Duration::from_millis(30))
+             .open()
+             .unwrap();
+ 
+diff --git a/src/controller.rs b/src/controller.rs
+index 473cee7..4c4f6a1 100644
+--- a/src/controller.rs
++++ b/src/controller.rs
+@@ -18,7 +18,7 @@ impl ReachyMiniMotorController {
+         let dph_v2 = rustypot::DynamixelProtocolHandler::v2();
+ 
+         let serial_port = serialport::new(serialport, 1_000_000)
+-            .timeout(Duration::from_millis(10))
++            .timeout(Duration::from_millis(30))
+             .open()?;
+ 
+         let all_ids = [
+@@ -419,7 +419,7 @@ impl ReachyMiniMotorController {
+ 
+         let mut n = self.serial_port.bytes_to_read()? as usize;
+         let start = std::time::Instant::now();
+-        while n == 0 && start.elapsed() < Duration::from_millis(10) {
++        while n == 0 && start.elapsed() < Duration::from_millis(30) {
+             std::thread::sleep(Duration::from_millis(5));
+             n = self.serial_port.bytes_to_read()? as usize;
+         }
